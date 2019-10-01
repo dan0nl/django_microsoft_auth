@@ -1,4 +1,4 @@
-import logging
+import logging, re
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
@@ -155,7 +155,13 @@ class MicrosoftAuthenticationBackend(ModelBackend):
             fullname = data.get("name")
             first_name, last_name = "", ""
             if fullname is not None:
-                first_name, last_name = data["name"].split(" ", 1)
+                matchObj1 = re.match(self.config.MICROSOFT_AUTH_LOGIN_FIRSTNAME, fullname)
+                matchObj2 = re.match(self.config.MICROSOFT_AUTH_LOGIN_LASTNAME, fullname)
+                if matchObj1 and matchObj2:
+                    first_name = matchObj1.group(1)
+                    last_name = matchObj2.group(1)
+                else:
+                    last_name, first_name = data["name"].split(" ", 1)
 
             try:
                 # create new Django user from provided data
