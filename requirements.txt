@@ -4,19 +4,18 @@
 #
 #    pip-compile --upgrade --output-file requirements.txt reqs/requirements.in
 #
-asn1crypto==0.24.0        # via cryptography
 certifi==2019.6.16        # via requests
 cffi==1.12.3              # via cryptography
 chardet==3.0.4            # via requests
-cryptography==2.7
-django==2.2.3
+cryptography==3.2         # via -r reqs/requirements-no-django.in
+django==2.2.3             # via -r reqs/requirements.in
 idna==2.8                 # via requests
 oauthlib==3.0.2           # via requests-oauthlib
 pycparser==2.19           # via cffi
-pyjwt==1.7.1
+pyjwt==1.7.1              # via -r reqs/requirements-no-django.in
 pytz==2019.1              # via django
-requests-oauthlib==1.2.0
-requests==2.22.0
+requests-oauthlib==1.2.0  # via -r reqs/requirements-no-django.in
+requests==2.22.0          # via -r reqs/requirements-no-django.in, requests-oauthlib
 six==1.12.0               # via cryptography
 sqlparse==0.3.0           # via django
 urllib3==1.25.3           # via requests
